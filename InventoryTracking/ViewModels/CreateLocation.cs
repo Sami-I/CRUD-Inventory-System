@@ -2,13 +2,14 @@
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc;
 
-namespace InventoryTracking.Models
+namespace InventoryTracking.ViewModels
 {
-    public class Location
+    public class CreateLocation
     {
         [Display(Name = "ID")]
         public int LocationId { get; set; }
 
+        [Remote(action: "checkLocation", controller: "Location")]
         public string Name { get; set; }
 
         public string Address { get; set; }
@@ -20,7 +21,7 @@ namespace InventoryTracking.Models
         [DataType(DataType.PostalCode)]
         public string PostCode { get; set; }
 
-        public Location()
+        public CreateLocation()
         {
         }
     }

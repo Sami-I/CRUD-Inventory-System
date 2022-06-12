@@ -80,7 +80,7 @@ namespace InventoryTracking.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("LocationId,Name")] Location location)
+        public async Task<IActionResult> Create([Bind("LocationId,Name,Address,City,PostCode")] Location location)
         {
             if (ModelState.IsValid)
             {
@@ -112,7 +112,7 @@ namespace InventoryTracking.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("LocationId,Name")] Location location)
+        public async Task<IActionResult> Edit(int id, [Bind("LocationId,Name,Address,City,PostCode")] Location location)
         {
             if (id != location.LocationId)
             {
