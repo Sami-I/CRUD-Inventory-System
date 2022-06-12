@@ -3,7 +3,7 @@
 @{
     ViewData["Title"] = "Details";
 
-    int products = Model.Products.ToList().Count();
+    int products = Model.Products.ToList().Count(); //Get count of how many products are at this location
 }
 
 <h1>Details</h1>
@@ -34,9 +34,14 @@ else
     var productColumns = Model.Products.ToList().First();
 
     <div>
+        <h4>Products at this location</h4>
+        <hr />
         <table class="table">
             <thead>
                 <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => productColumns.ProductId)
+                    </th>
                     <th>
                         @Html.DisplayNameFor(model => productColumns.Name)
                     </th>
@@ -56,6 +61,9 @@ else
                 @foreach (var product in Model.Products)
                 {
                     <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => product.ProductId)
+                        </td>
                         <td>
                             @Html.DisplayFor(modelItem => product.Name)
                         </td>
