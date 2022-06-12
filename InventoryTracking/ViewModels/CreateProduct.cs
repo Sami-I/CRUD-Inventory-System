@@ -15,7 +15,7 @@ namespace InventoryTracking.ViewModels
         public string Name { get; set; }
 
         [Column(TypeName = "decimal(18, 2)")]
-        [Display(Name = "Price")]
+        [Display(Name = "Price in £")]
         public decimal Price { get; set; }
 
         public string Details { get; set; }
