@@ -3,6 +3,7 @@ using System;
 using InventoryTracking.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InventoryTracking.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220612003129_CreateInitial")]
+    partial class CreateInitial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.5");
@@ -42,7 +44,7 @@ namespace InventoryTracking.Data.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("LocationId")
+                    b.Property<int>("LocationID")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Name")
@@ -57,7 +59,7 @@ namespace InventoryTracking.Data.Migrations
 
                     b.HasKey("ProductId");
 
-                    b.HasIndex("LocationId");
+                    b.HasIndex("LocationID");
 
                     b.ToTable("Product");
                 });
@@ -261,8 +263,8 @@ namespace InventoryTracking.Data.Migrations
             modelBuilder.Entity("InventoryTracking.Models.Product", b =>
                 {
                     b.HasOne("InventoryTracking.Models.Location", "Location")
-                        .WithMany()
-                        .HasForeignKey("LocationId")
+                        .WithMany("Products")
+                        .HasForeignKey("LocationID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -318,6 +320,11 @@ namespace InventoryTracking.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("InventoryTracking.Models.Location", b =>
+                {
+                    b.Navigation("Products");
                 });
 #pragma warning restore 612, 618
         }

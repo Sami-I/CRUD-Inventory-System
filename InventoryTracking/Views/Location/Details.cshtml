@@ -1,0 +1,76 @@
+@model InventoryTracking.ViewModels.LocationDetails
+
+@{
+    ViewData["Title"] = "Details";
+
+    int products = Model.Products.ToList().Count();
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Location</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Location.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Location.Name)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Location.LocationId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
+<br />
+@if (products == 0)
+{
+    <p>No products at this location</p>
+}
+else
+{
+    var productColumns = Model.Products.ToList().First();
+
+    <div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => productColumns.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => productColumns.Price)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => productColumns.Details)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => productColumns.Quantity)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var product in Model.Products)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => product.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => product.Price)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => product.Details)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => product.Quantity)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
