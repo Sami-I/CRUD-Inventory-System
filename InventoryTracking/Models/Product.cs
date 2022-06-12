@@ -21,6 +21,11 @@ namespace InventoryTracking.Models
         [Range(1, int.MaxValue, ErrorMessage = "Please enter a positive quantity")]
         public int Quantity { get; set; }
 
+        [NotMapped]
+        [Column(TypeName = "decimal(18, 2)")]
+        [Display(Name = "Total in £")]
+        public decimal TotalCost { get { return (Price * Quantity); } }
+
         [Display(Name = "Location")]
         public int LocationId { get; set; }
         [ForeignKey("LocationId")]
